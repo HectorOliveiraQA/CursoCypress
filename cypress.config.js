@@ -1,19 +1,16 @@
-/* eslint-disable no-unused-vars */
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
   chromeWebSecurity: false,
-
   e2e: {
     baseUrl: 'https://notes-serverless-app.com',
     env: {
-      viewportWidthBreakpoint: 769,
+      viewportWidthBreakpoint: 768,
     },
-    defaultCommandTimeout: 25000,
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      require('@cypress/grep/src/plugin')(config)
+      return config
     },
   },
-  projectId: 'qc7cyq',
-
+  projectId: 'ywd6nd',
 })
