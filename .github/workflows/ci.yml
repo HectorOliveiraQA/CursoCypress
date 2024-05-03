@@ -15,7 +15,6 @@ jobs:
       run: npm install
     - name: Run ESLint
       run: npm run lint
-
   cypress-tests-desktop:
     needs: eslint
     runs-on: ubuntu-22.04
@@ -23,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run end-to-end tests on desktop viewport 🧪
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v5
         env:
           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
           CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
@@ -32,7 +31,6 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
           command: npm run test:cloud
-
   cypress-tests-tablet:
     needs: eslint
     runs-on: ubuntu-22.04
@@ -40,7 +38,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run end-to-end tests on tablet viewport 🧪
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v5
         env:
           CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
           CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
