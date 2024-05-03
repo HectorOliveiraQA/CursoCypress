@@ -17,8 +17,8 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
 })
 
 Cypress.Commands.add('guiLogin', (
-  username = Cypress.env('USER_EMAIL'),
-  password = Cypress.env('USER_PASSWORD')
+  username = Cypress.env('CYPRESS_USER_EMAIL'),
+  password = Cypress.env('CYPRESS_USER_PASSWORD')
 ) => {
   cy.intercept('GET', '**/notes').as('getNotes')
   cy.visit('/login')
@@ -30,8 +30,8 @@ Cypress.Commands.add('guiLogin', (
 })
 
 Cypress.Commands.add('sessionLogin', (
-  username = Cypress.env('USER_EMAIL'),
-  password = Cypress.env('USER_PASSWORD')
+  username = Cypress.env('CYPRESS_USER_EMAIL'),
+  password = Cypress.env('CYPRESS_USER_PASSWORD')
 ) => {
   const login = () => cy.guiLogin(username, password)
   cy.session(username, login)
