@@ -15,7 +15,7 @@ jobs:
         run: npm install
       - name: Run ESLint
         run: npm run lint
-      
+
   cypress-tests-desktop:
     needs: eslint
     runs-on: ubuntu-22.04
@@ -33,7 +33,7 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
           command: npm run test:cloud
-  
+
   cypress-tests-tablet:
     needs: eslint
     runs-on: ubuntu-22.04
@@ -49,3 +49,15 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
           command: npm run test:tablet:cloud
+
+  trigger-cypress-tests:
+    runs-on: ubuntu-22.04
+    needs: [eslint, cypress-tests-desktop, cypress-tests-tablet]
+    steps:
+      - name: Trigger Cypress Tests in Another Repo
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${{ secrets.MY_TOKEN }}" \
+            https://api.github.com/repos/HectorOliveiraQA/cypress/dispatches \
+            -d '{"event_type":"run-tests"}'
