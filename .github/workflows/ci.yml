@@ -10,18 +10,19 @@ jobs:
   eslint:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
-    - name: Install modules
-      run: npm install
-    - name: Run ESLint
-      run: npm run lint
+      - uses: actions/checkout@v3
+      - name: Install modules
+        run: npm install
+      - name: Run ESLint
+        run: npm run lint
       
   cypress-tests-desktop:
     needs: eslint
     runs-on: ubuntu-22.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Install modules
+        run: npm install
       - name: Run end-to-end tests on desktop viewport 🧪
         uses: cypress-io/github-action@v5
         env:
@@ -37,8 +38,9 @@ jobs:
     needs: eslint
     runs-on: ubuntu-22.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Install modules
+        run: npm install
       - name: Run end-to-end tests on tablet viewport 🧪
         uses: cypress-io/github-action@v5
         env:
